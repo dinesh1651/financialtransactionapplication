@@ -1,0 +1,10 @@
+-- INSERT INTO accounts (id, owner_name, balance, currency)
+-- VALUES (1,'Alice',10000.00,'INR');
+--
+-- INSERT INTO accounts (id, owner_name, balance, currency)
+-- VALUES (2,'Bob',7000.00,'INR');
+--
+-- INSERT INTO accounts (id, owner_name, balance, currency)
+-- VALUES (3,'Charlie',5000.00,'INR');
+--
+-- ALTER TABLE accounts ALTER COLUMN id RESTART WITH 4;
