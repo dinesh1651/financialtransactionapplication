@@ -26,4 +26,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     OR t.targetAccountId = :accountId
     ORDER BY t.timestamp DESC""")
     List<Transaction> findTransactionHistory(@Param("accountId") Long accountId);
+
+    @Query("""
+    SELECT t FROM Transaction t WHERE amount>=1000 AND status="SUCCESS" """)
+    List<Transaction> findTransactionGreaterThanThousand();
 }

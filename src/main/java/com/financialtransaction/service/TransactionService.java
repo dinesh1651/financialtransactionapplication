@@ -15,4 +15,6 @@ public interface TransactionService {
         void processTransactions(String batchId, List<TransactionRequestDTO> transactions);
 
         List<Transaction> getTransactionsByAccountId(Long accountId, Optional<LocalDateTime> from, Optional<LocalDateTime> to);
+
+        List<Transaction> getTransactionGreaterThanThousand();
 }

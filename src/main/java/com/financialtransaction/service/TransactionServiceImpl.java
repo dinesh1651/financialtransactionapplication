@@ -129,4 +129,9 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return transactionRepository.findTransactionHistory(accountId);
     }
+
+    @Override
+    public List<Transaction> getTransactionGreaterThanThousand() {
+        return transactionRepository.findTransactionGreaterThanThousand();
+    }
 }

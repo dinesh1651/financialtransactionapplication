@@ -7,6 +7,7 @@ import com.financialtransaction.exception.NoTransactionAvailableException;
 import com.financialtransaction.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,10 @@ import java.util.UUID;
                                                                        @RequestParam(required = false) Optional<LocalDateTime> from,
                                                                        @RequestParam(required = false) Optional<LocalDateTime> to){
             return ResponseEntity.ok(transactionService.getTransactionsByAccountId(accountId, from, to));
+        }
+
+        @GetMapping("/transactionGreaterThanThousand")
+        public ResponseEntity<List<Transaction>> getTransactionsGreaterThanThousand(){
+            return ResponseEntity.ok(transactionService.getTransactionGreaterThanThousand());
         }
 }
