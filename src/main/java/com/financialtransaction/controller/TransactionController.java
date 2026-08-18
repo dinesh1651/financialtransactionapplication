@@ -50,12 +50,7 @@ import java.util.UUID;
                             "Batch accepted for processing"
                     ));
         }
-//        @GetMapping("/history/{accountId}")
-//        public ResponseEntity<List<Transaction>> getTransactionHistory(@PathVariable Long accountId,
-//                                                                           @RequestParam LocalDateTime from,
-//                                                                           @RequestParam LocalDateTime to){
-//            return ResponseEntity.ok(transactionService.getTransactionsByAccountId(accountId, from, to));
-//        }
+
         @GetMapping("/history/{accountId}")
         public ResponseEntity<List<Transaction>> getTransactionHistory(@PathVariable Long accountId,
                                                                        @RequestParam(required = false) Optional<LocalDateTime> from,
