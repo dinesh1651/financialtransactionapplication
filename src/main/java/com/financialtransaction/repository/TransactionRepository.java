@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,6 +29,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findTransactionHistory(@Param("accountId") Long accountId);
 
     @Query("""
-    SELECT t FROM Transaction t WHERE amount>=1000 AND status="SUCCESS" """)
-    List<Transaction> findTransactionGreaterThanThousand();
+    SELECT t FROM Transaction t WHERE amount>=:amount AND status="SUCCESS" """)
+    List<Transaction> findTransactionGreaterThanThousand(BigDecimal amount);
 }

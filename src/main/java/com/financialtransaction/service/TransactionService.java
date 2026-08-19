@@ -5,6 +5,7 @@ import com.financialtransaction.dto.TransactionRequestDTO;
 import com.financialtransaction.entity.Transaction;
 import org.springframework.scheduling.annotation.Async;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +17,5 @@ public interface TransactionService {
 
         List<Transaction> getTransactionsByAccountId(Long accountId, Optional<LocalDateTime> from, Optional<LocalDateTime> to);
 
-        List<Transaction> getTransactionGreaterThanThousand();
+        List<Transaction> getTransactionGreaterThanThousand(BigDecimal amount);
 }

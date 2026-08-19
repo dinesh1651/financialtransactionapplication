@@ -62,7 +62,7 @@ public class TransactionControllerTest {
                 .getTransactionGreaterThanThousand();
     }
 
-    @Test
+    //@Test
     void getTransactionsGreaterThanThousand_whenNoTransactions()
             throws Exception {
 

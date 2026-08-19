@@ -131,7 +131,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> getTransactionGreaterThanThousand() {
-        return transactionRepository.findTransactionGreaterThanThousand();
+    public List<Transaction> getTransactionGreaterThanThousand(BigDecimal amount) {
+        return transactionRepository.findTransactionGreaterThanThousand(amount);
     }
 }

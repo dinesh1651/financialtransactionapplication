@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -58,8 +59,12 @@ import java.util.UUID;
             return ResponseEntity.ok(transactionService.getTransactionsByAccountId(accountId, from, to));
         }
 
-        @GetMapping("/transactionGreaterThanThousand")
-        public ResponseEntity<List<Transaction>> getTransactionsGreaterThanThousand(){
-            return ResponseEntity.ok(transactionService.getTransactionGreaterThanThousand());
+        @GetMapping("/transactionGreaterThanThousand/{amount}")
+        public ResponseEntity<List<Transaction>> getTransactionsGreaterThanThousand(@PathVariable BigDecimal amount){
+            List<Transaction> transactionList = transactionService.getTransactionGreaterThanThousand(amount);
+            return ResponseEntity.ok(transactionList);
         }
+
+
+
 }
