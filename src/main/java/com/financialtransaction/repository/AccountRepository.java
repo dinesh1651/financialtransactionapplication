@@ -14,4 +14,5 @@ import java.util.Optional;
         @Query("SELECT a FROM Account a WHERE a.id = :id")
         Optional<Account> findAccountForUpdate(Long id);
 
-}
+        Optional<Account> findByAccountCreation_AccountNumber(String accountNumber);
+    }

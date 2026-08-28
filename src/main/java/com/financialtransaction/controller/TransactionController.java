@@ -7,6 +7,7 @@ import com.financialtransaction.exception.NoTransactionAvailableException;
 import com.financialtransaction.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,15 @@ import java.util.UUID;
     @RestController
     @RequestMapping("/api/v1/transactions")
     @RequiredArgsConstructor
+    @Slf4j
     public class TransactionController {
 
         private final TransactionService transactionService;
 
         @PostMapping("/process")
         public ResponseEntity<BatchResponseDTO> processTransactions(
-                @RequestBody @Valid List<TransactionRequestDTO> transactions) {
-
+                @RequestBody List<TransactionRequestDTO> transactions) {
+            log.info("transactions: {}", transactions);
             for (TransactionRequestDTO transaction : transactions) {
 
                 if (transaction.getSourceAccountId()

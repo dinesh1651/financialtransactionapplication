@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
         private Long targetAccountId;
 
         @NotNull(message = "Amount is required")
-        @DecimalMin(value = "0.01", message = "Amount must be greater than 0")
+        @DecimalMin(value = "0.00", message = "Amount must be greater than 0")
         private BigDecimal amount;
 
         @NotNull(message = "Timestamp is required")

@@ -31,34 +31,31 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final List<Account> accounts = new ArrayList<>();
 
-    @PostConstruct
-    public void init() {
-
-        Account account1 = Account.builder()
-                .id(1L)
-                .ownerName("John")
-                .balance(new BigDecimal("10000.00"))
-                .currency("INR")
-                .build();
-
-        Account account2 = Account.builder()
-                .id(2L)
-                .ownerName("David")
-                .balance(new BigDecimal("5000.00"))
-                .currency("INR")
-                .build();
-
-        Account account3 = Account.builder()
-                .id(3L)
-                .ownerName("Dinesh")
-                .balance(new BigDecimal("20000.00"))
-                .currency("INR")
-                .build();
-
-        accounts.add(account1);
-        accounts.add(account2);
-        accounts.add(account3);
-    }
+//    @PostConstruct
+//    public void init() {
+//
+//        Account account1 = Account.builder()
+//                .id(1L)
+//                .balance(new BigDecimal("10000.00"))
+//                .currency("INR")
+//                .build();
+//
+//        Account account2 = Account.builder()
+//                .id(2L)
+//                .balance(new BigDecimal("5000.00"))
+//                .currency("INR")
+//                .build();
+//
+//        Account account3 = Account.builder()
+//                .id(3L)
+//                .balance(new BigDecimal("20000.00"))
+//                .currency("INR")
+//                .build();
+//
+//        accounts.add(account1);
+//        accounts.add(account2);
+//        accounts.add(account3);
+//    }
 
     @Override
     @Async("transactionExecutor")
@@ -88,8 +85,7 @@ public class TransactionServiceImpl implements TransactionService {
                         t.getTargetAccountId())).toList();
 
         if (validTransactions.isEmpty()) {
-            throw new NoTransactionAvailableException(
-                    "Please change target account");
+            throw new NoTransactionAvailableException("Please change target account");
         }
         return validTransactions;
     }
@@ -112,7 +108,6 @@ public class TransactionServiceImpl implements TransactionService {
                 result.add(current);
             }
         }
-
         return result;
     }
 

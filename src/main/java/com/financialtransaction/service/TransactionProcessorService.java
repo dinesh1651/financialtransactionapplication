@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class TransactionProcessorService {
@@ -29,25 +31,15 @@ public class TransactionProcessorService {
 
         try {
 
-            Long firstLock = Math.min(
-                    dto.getSourceAccountId(),
-                    dto.getTargetAccountId()
-            );
+            Long firstLock = Math.min(dto.getSourceAccountId(),dto.getTargetAccountId());
 
-            Long secondLock = Math.max(
-                    dto.getSourceAccountId(),
-                    dto.getTargetAccountId()
-            );
+            Long secondLock = Math.max(dto.getSourceAccountId(), dto.getTargetAccountId());
 
-            Account firstAccount =
-                    accountRepository.findAccountForUpdate(firstLock)
-                            .orElseThrow(() ->
-                                    new RuntimeException("Account not found: " + firstLock));
+            Account firstAccount = accountRepository.findAccountForUpdate(firstLock)
+                            .orElseThrow(() -> new RuntimeException("Account not found: " + firstLock));
 
-            Account secondAccount =
-                    accountRepository.findAccountForUpdate(secondLock)
-                            .orElseThrow(() ->
-                                    new RuntimeException("Account not found: " + secondLock));
+            Account secondAccount = accountRepository.findAccountForUpdate(secondLock)
+                    .orElseThrow(() -> new RuntimeException("Account not found: " + secondLock));
 
             Account source;
             Account target;
@@ -66,22 +58,16 @@ public class TransactionProcessorService {
                 transaction.setFailureReason("Insufficient Balance");
 
                 transactionRepository.save(transaction);
-                return;
             }
 
-            source.setBalance(
-                    source.getBalance().subtract(dto.getAmount())
-            );
-
-            target.setBalance(
-                    target.getBalance().add(dto.getAmount())
-            );
+            source.setBalance(source.getBalance().subtract(dto.getAmount()));
+            target.setBalance(target.getBalance().add(dto.getAmount()));
 
             accountRepository.save(source);
             accountRepository.save(target);
 
             transaction.setStatus(TransactionStatus.SUCCESS);
-
+//            transaction.setTimestamp(LocalDateTime.now());
             transactionRepository.save(transaction);
 
         } catch (Exception e) {

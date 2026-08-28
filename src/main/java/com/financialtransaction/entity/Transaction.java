@@ -1,6 +1,7 @@
 package com.financialtransaction.entity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,6 +32,8 @@ public class Transaction {
         @Enumerated(EnumType.STRING)
         private TransactionStatus status;
 
+        @CreationTimestamp
+        @Column(name = "timestamp", nullable = false, updatable = false)
         private LocalDateTime timestamp;
 
         private String failureReason;
